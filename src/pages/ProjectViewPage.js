@@ -26,7 +26,7 @@ function ProjectViewPage() {
             &nbsp;
             <Link className='btn btn-danger'>Report Issue&nbsp;<i className="fa-solid fa-bug"></i></Link>
             &nbsp;
-            <Link className='btn btn-success'>Versions&nbsp;<i className="fa-solid fa-code-compare"></i></Link>
+            <Link className='btn btn-success' to={"/projects/"+projectId+"/versions"} >Versions&nbsp;<i className="fa-solid fa-code-compare"></i></Link>
             </div>
             <hr />
             <h3><strong>Issues : </strong></h3>

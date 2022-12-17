@@ -9,6 +9,7 @@ import ProjectViewPage from "./pages/ProjectViewPage";
 import ChangePasswordPage from "./pages/ChangePasswordPage";
 import ProjectDetailsEditPage from "./pages/ProjectDetailsEditPage";
 import ProjectCreatePage from "./pages/ProjectCreatePage";
+import ProjectVersionUpdatePage from "./pages/ProjectVersionUpdatePage";
 
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
           <Route path="/projects/create" element={<ProjectCreatePage/>}/>
           <Route path="/projects/:projectId/" element={<ProjectViewPage/>}/>
           <Route path="/projects/:projectId/edit" element={<ProjectDetailsEditPage/>}/>
+          <Route path="/projects/:projectId/versions" element={<ProjectVersionUpdatePage/>}/>
         </Routes>
       </BrowserRouter>
     </div>
