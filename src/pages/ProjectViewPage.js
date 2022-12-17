@@ -18,6 +18,9 @@ function ProjectViewPage() {
             <h5><strong>ID : </strong>#{project.id}</h5>
             <h5><strong>Owner : </strong><Link className='badge bg-warning text-dark pill-rounded' >@{project.owner.username}&nbsp;<i className="fa-solid fa-crown"></i></Link></h5>
             <div className="mb-3">
+                <h5><strong>Repository : </strong><Link target={"_blank"} to={project.repoURL} >{project.repoURL}</Link></h5>
+            </div>
+            <div className="mb-3">
                 <h5><strong>Description : &nbsp;<i className="fa-sharp fa-solid fa-circle-info"></i></strong></h5>
                 <p>{project.description}</p>
             </div>
