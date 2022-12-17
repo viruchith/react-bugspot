@@ -1,23 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from "./logo.svg";
+import "./App.css";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import LoginPage from "./pages/LoginPage";
+import NavBar from "./components/NavBar";
+import SignupPage from "./pages/SignupPage";
+import UserProjectsPage from "./pages/UserProjectsPage";
+import ProjectViewPage from "./pages/ProjectViewPage";
+import ChangePasswordPage from "./pages/ChangePasswordPage";
+import ProjectDetailsEditPage from "./pages/ProjectDetailsEditPage";
+import ProjectCreatePage from "./pages/ProjectCreatePage";
+
 
 function App() {
+
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <BrowserRouter>
+      <NavBar/>
+        <Routes>
+          <Route path="/" element={<div>Home</div>} />
+          <Route path="/login" element={<LoginPage/>} />
+          <Route path="/signup" element={<SignupPage/>} />
+          <Route path="/changepassword" element={<ChangePasswordPage/>}/>
+          <Route path="/projects" element={<UserProjectsPage/>} />
+          <Route path="/projects/create" element={<ProjectCreatePage/>}/>
+          <Route path="/projects/:projectId/" element={<ProjectViewPage/>}/>
+          <Route path="/projects/:projectId/edit" element={<ProjectDetailsEditPage/>}/>
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }
