@@ -3,14 +3,27 @@ import { CodeBlock } from 'react-code-blocks';
 import { validate } from 'validate.js';
 import FieldErrorsToStateMapper from '../helpers/FieldErrorsToStateMapper';
 import FieldErrorsComponent from '../components/FieldErrorsComponent';
+import AlertBoxComponent from '../components/AlertBoxComponent';
+import userProjectsMockArray from '../mock/userProjectsMock';
+import { useParams } from 'react-router-dom';
 
 function CreateIssuePage() {
 
+    const {projectId} = useParams();
+
+
+    const project = userProjectsMockArray.find(p=>p.id==projectId);
+
+
+    const [projectVersions, setprojectVersions] = useState(project.projectVersions);
+
     const [sourceCode, setSourceCode] = useState("");
 
-    const [fieldsErrors, setFieldsErrors] = useState({category:[],reproducibility:[],severity:[],priority:[],summary:[],description:[]});
+    const [fieldsErrors, setFieldsErrors] = useState({category:[],reproducibility:[],severity:[],priority:[],productVersion:[],summary:[],description:[]});
     
     const [alertState,setAlertState] =  useState({visible:false,type:"danger",message:""});
+
+
 
 
     const createIssueRules = {
@@ -38,6 +51,9 @@ function CreateIssuePage() {
         },
         description:{
             presence:true
+        },
+        productVersion:{
+            presence:true
         }
     };
 
@@ -49,7 +65,7 @@ function CreateIssuePage() {
         const errors = validate(formValues,createIssueRules);
         FieldErrorsToStateMapper(errors,fieldsErrors,setFieldsErrors);
         if(errors===undefined){
-          setAlertState({visible:true,type:"success",message:"Update Successful !"});
+          setAlertState({visible:true,type:"success",message:"Issue created Successfully !"});
           console.log(formValues);
         }
       };
@@ -64,6 +80,7 @@ function CreateIssuePage() {
             </div>
             <hr />
             <form action="" method="post" onSubmit={onSubmitHandler}>
+            {alertState.visible && <AlertBoxComponent visible={alertState.visible} type={alertState.type} message={alertState.message} />}
                 <div className="mb-3">
                     <label htmlFor="category" className="form-label">Category : </label>
                     <select className="form-select form-select-lg" name="category" id="category">
@@ -113,9 +130,11 @@ function CreateIssuePage() {
                 </div>
                 <div className="mb-3">
                     <label htmlFor="projectVersion" className="form-label">Project Version : </label>
-                    <select className="form-select form-select-lg" name="projectVersion" id="projectVersion">
-                        <option value="Feature" >Feature</option>
+                    <select className="form-select form-select-lg" name="productVersion" id="projductVersion">
+                        <option value="NA">NA</option>
+                       {projectVersions.map(version=><option key={version} value={version} >{version}</option>)}
                     </select>
+                    <FieldErrorsComponent errors={fieldsErrors.productVersion} />
                 </div>
                 <div className="mb-3">
                     <label htmlFor="summary" className="form-label">Summary : </label>
@@ -137,11 +156,16 @@ function CreateIssuePage() {
                 </div>
                 <div className="mb-3">
                     <label htmlFor="sourceCode" className="form-label">Source Code : </label>
-                    <div className="mb-3">
-                        <label htmlFor="">Code Preview :</label>
-                        <CodeBlock text={sourceCode} language={"text"} wrapLines />
-                    </div>
+                    {
+                     sourceCode!=="" &&   <div className="mb-3">
+                            <label htmlFor="">Code Preview :</label>
+                            <CodeBlock text={sourceCode} language={"text"} wrapLines />
+                        </div>
+                    }
                     <textarea className='form-control' name="sourceCode" id="sourceCode" value={sourceCode} onChange={(e)=>{setSourceCode(e.target.value);}} cols="30" rows="10"></textarea>
+                </div>
+                <div className="mb-3">
+                {alertState.visible && <AlertBoxComponent visible={alertState.visible} type={alertState.type} message={alertState.message} />}
                 </div>
                 <div className="mb-3">
                     <button className="btn btn-primary">Create</button>
