@@ -27,7 +27,7 @@ function ProjectViewPage() {
             <div className="p-3">
             <Link className='btn btn-info' to={"/projects/"+projectId+"/members"} >View Members&nbsp;<i className="fa-solid fa-people-group"></i></Link>
             &nbsp;
-            <Link className='btn btn-danger'>Report Issue&nbsp;<i className="fa-solid fa-bug"></i></Link>
+            <Link className='btn btn-danger' to={"/projects/"+projectId+"/issues/create"}  >Report Issue&nbsp;<i className="fa-solid fa-bug"></i></Link>
             &nbsp;
             <Link className='btn btn-success' to={"/projects/"+projectId+"/versions"} >Versions&nbsp;<i className="fa-solid fa-code-compare"></i></Link>
             </div>

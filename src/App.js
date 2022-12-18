@@ -11,6 +11,7 @@ import ProjectDetailsEditPage from "./pages/ProjectDetailsEditPage";
 import ProjectCreatePage from "./pages/ProjectCreatePage";
 import ProjectVersionUpdatePage from "./pages/ProjectVersionUpdatePage";
 import ProjectMembersPage from "./pages/ProjectMembersPage";
+import CreateIssuePage from "./pages/CreateIssuePage";
 
 
 function App() {
@@ -31,6 +32,7 @@ function App() {
           <Route path="/projects/:projectId/edit" element={<ProjectDetailsEditPage/>}/>
           <Route path="/projects/:projectId/versions" element={<ProjectVersionUpdatePage/>}/>
           <Route path="/projects/:projectId/members" element={<ProjectMembersPage/>}/> 
+          <Route path="/projects/:projectId/issues/create" element={<CreateIssuePage/>}/> 
         </Routes>
       </BrowserRouter>
     </div>
