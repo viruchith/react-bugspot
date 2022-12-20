@@ -5,6 +5,7 @@ import AlertBoxComponent from '../components/AlertBoxComponent';
 import FieldErrorsComponent from '../components/FieldErrorsComponent';
 import FieldErrorsToStateMapper from '../helpers/FieldErrorsToStateMapper';
 import FormContainerComponent from '../components/FormContainerComponent';
+import PasswordInputComponent from '../components/PasswordInputComponent';
 
 function SignupPage() {
 
@@ -98,14 +99,13 @@ function SignupPage() {
 
           <div className="mb-3">
             <label htmlFor="password" className="form-label">Password</label>
-            <input type="password"
-              className="form-control" name="password" id="password" aria-describedby="helpId" placeholder=""/>
+            <PasswordInputComponent name={"password"} id={"password"}/>
               <FieldErrorsComponent errors={fieldsErrors.password} />
           </div>
 
           <div className="mb-3">
             <label htmlFor="confirmPassword" className="form-label">Confirm Password</label>
-            <input type="password" className="form-control" name="confirmPassword" id="confirmPassword" aria-describedby="helpId" placeholder=""/>
+            <PasswordInputComponent name={"confirmPassword"} id={"confirmPassword"}/>
               <FieldErrorsComponent errors={fieldsErrors.confirmPassword} />
           </div>
           <button type="submit" className="btn btn-primary">SignUp</button>

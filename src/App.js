@@ -6,12 +6,14 @@ import NavBar from "./components/NavBar";
 import SignupPage from "./pages/SignupPage";
 import UserProjectsPage from "./pages/UserProjectsPage";
 import ProjectViewPage from "./pages/ProjectViewPage";
-import ChangePasswordPage from "./pages/ChangePasswordPage";
+import ChangePasswordComponent from "./components/ChangePasswordComponent";
 import ProjectDetailsEditPage from "./pages/ProjectDetailsEditPage";
 import ProjectCreatePage from "./pages/ProjectCreatePage";
 import ProjectVersionUpdatePage from "./pages/ProjectVersionUpdatePage";
 import ProjectMembersPage from "./pages/ProjectMembersPage";
 import CreateIssuePage from "./pages/CreateIssuePage";
+import UserAccountPage from "./pages/UserAccountPage";
+
 
 
 function App() {
@@ -25,7 +27,7 @@ function App() {
           <Route path="/" element={<div>Home</div>} />
           <Route path="/login" element={<LoginPage/>} />
           <Route path="/signup" element={<SignupPage/>} />
-          <Route path="/changepassword" element={<ChangePasswordPage/>}/>
+          <Route path="/account" element={<UserAccountPage/>}/>
           <Route path="/projects" element={<UserProjectsPage/>} />
           <Route path="/projects/create" element={<ProjectCreatePage/>}/>
           <Route path="/projects/:projectId/" element={<ProjectViewPage/>}/>

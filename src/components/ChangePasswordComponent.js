@@ -1,18 +1,18 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
 import { validate } from 'validate.js';
-import AlertBoxComponent from '../components/AlertBoxComponent';
-import FieldErrorsComponent from '../components/FieldErrorsComponent';
+import AlertBoxComponent from './AlertBoxComponent';
+import FieldErrorsComponent from './FieldErrorsComponent';
 import FieldErrorsToStateMapper from '../helpers/FieldErrorsToStateMapper';
-import FormContainerComponent from '../components/FormContainerComponent';
+import FormContainerComponent from './FormContainerComponent';
+import PasswordInputComponent from './PasswordInputComponent';
 
-function ChangePasswordPage() {
+function ChangePasswordComponent() {
     const [fieldsErrors, setFieldsErrors] = useState({password:[],confirmPassword:[]});
 
     const [alertState,setAlertState] =  useState({visible:false,type:"danger",message:""});
   
-  
-    const signupFormValidateRules = {
+    const changePasswordFormValidateRules = {
       password:{
         presence:true,
         length:{
@@ -31,10 +31,10 @@ function ChangePasswordPage() {
       e.preventDefault();
       setAlertState({visible:false,type:"success",message:""});
       const formValues = validate.collectFormValues(e.target);
-      const errors = validate(formValues,signupFormValidateRules);
+      const errors = validate(formValues,changePasswordFormValidateRules);
       FieldErrorsToStateMapper(errors,fieldsErrors,setFieldsErrors);
       if(errors===undefined){
-        setAlertState({visible:true,type:"success",message:"SignUp Successful !"});
+        setAlertState({visible:true,type:"success",message:"Password updated Successfully !"});
       }
     };
   
@@ -48,20 +48,19 @@ function ChangePasswordPage() {
             </div>
             {alertState.visible && <AlertBoxComponent type={alertState.type} message={alertState.message} />}
             <div className="mb-3">
-              <label htmlFor="password" className="form-label">Current Password</label>
-              <input type="password"
-                className="form-control" name="password" id="password" aria-describedby="helpId" placeholder=""/>
-                <FieldErrorsComponent errors={fieldsErrors.password} />
-            </div>
-  
-            <div className="mb-3">
-              <label htmlFor="confirmPassword" className="form-label">Confirm Password</label>
-              <input type="password" className="form-control" name="confirmPassword" id="confirmPassword" aria-describedby="helpId" placeholder=""/>
-                <FieldErrorsComponent errors={fieldsErrors.confirmPassword} />
-            </div>
+            <label htmlFor="password" className="form-label">Password</label>
+            <PasswordInputComponent name={"password"} id={"password"}/>
+              <FieldErrorsComponent errors={fieldsErrors.password} />
+          </div>
+
+          <div className="mb-3">
+            <label htmlFor="confirmPassword" className="form-label">Confirm Password</label>
+            <PasswordInputComponent name={"confirmPassword"} id={"confirmPassword"}/>
+              <FieldErrorsComponent errors={fieldsErrors.confirmPassword} />
+          </div>
             <button type="submit" className="btn btn-primary">Change</button>
           </form>
     </FormContainerComponent>)
 }
 
-export default ChangePasswordPage
+export default ChangePasswordComponent

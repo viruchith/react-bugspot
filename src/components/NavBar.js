@@ -1,3 +1,4 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React from 'react'
 import { Link } from 'react-router-dom'
 
@@ -5,7 +6,7 @@ function NavBar() {
   return (
     <nav className="navbar navbar-dark navbar-expand-lg bg-dark">
     <div className="container-fluid">
-      <Link className="navbar-brand" to={"/"}>Navbar</Link>
+      <Link className="navbar-brand" to={"/"}>BugSpot <FontAwesomeIcon icon="fa-solid fa-spider" /></Link>
       <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span className="navbar-toggler-icon"></span>
       </button>
@@ -20,7 +21,10 @@ function NavBar() {
           <li className="nav-item">
             <Link className="nav-link" to="/projects">Projects</Link>
           </li>
-          <li className="nav-item dropdown">
+          <li className="nav-item">
+            <Link className="nav-link" to="/account">Account</Link>
+          </li>
+          {/* <li className="nav-item dropdown">
             <Link className="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               Dropdown
             </Link>
@@ -33,7 +37,7 @@ function NavBar() {
           </li>
           <li className="nav-item">
             <Link className="nav-link disabled">Disabled</Link>
-          </li>
+          </li> */}
         </ul>
       </div>
     </div>
