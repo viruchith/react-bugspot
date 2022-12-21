@@ -13,6 +13,7 @@ import ProjectVersionUpdatePage from "./pages/ProjectVersionUpdatePage";
 import ProjectMembersPage from "./pages/ProjectMembersPage";
 import CreateIssuePage from "./pages/CreateIssuePage";
 import UserAccountPage from "./pages/UserAccountPage";
+import UserDetailsPage from "./pages/UserDetailsPage";
 
 
 
@@ -35,6 +36,7 @@ function App() {
           <Route path="/projects/:projectId/versions" element={<ProjectVersionUpdatePage/>}/>
           <Route path="/projects/:projectId/members" element={<ProjectMembersPage/>}/> 
           <Route path="/projects/:projectId/issues/create" element={<CreateIssuePage/>}/> 
+          <Route path="/u/:username/" element={<UserDetailsPage/>}/>
         </Routes>
       </BrowserRouter>
     </div>

@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import userProjectsMockArray from '../mock/userProjectsMock';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import usersMockArray from '../mock/usersMock';
 import AlertBoxComponent from '../components/AlertBoxComponent';
 
@@ -83,7 +83,7 @@ function ProjectMembersPage() {
                                 return (
                                 <tr key={member.id}>
                                     <td>{member.id}</td>
-                                    <td>{member.username}</td>
+                                    <td><Link to={"/u/"+member.username} >{member.username}</Link></td>
                                     <td>{member.email}</td>
                                     <td>{member.firstName}</td>
                                     <td>{member.lastName}</td>

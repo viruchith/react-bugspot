@@ -1,6 +1,8 @@
 const usersMockArray = [
-    {"id":1,"firstName":"Dalenna","lastName":"Tomlin","email":"dtomlin0@creativecommons.org","username":"dtomlin0"},
-    {"id":2,"firstName":"Shellie","lastName":"O'Crowley","email":"socrowley1@booking.com","username":"socrowley1"},
+    {"id":1,"firstName":"Viruchith","lastName":"Ganesan","email":"v@g.com","username":"viruchith"},
+    {"id":2,"firstName":"Shrishtidharan","lastName":"Kumaresan","email":"shiru@g.com","username":"shiru"},
+    {"id":111,"firstName":"Dalenna","lastName":"Tomlin","email":"dtomlin0@creativecommons.org","username":"dtomlin0"},
+    {"id":211,"firstName":"Shellie","lastName":"O'Crowley","email":"socrowley1@booking.com","username":"socrowley1"},
     {"id":3,"firstName":"Stefano","lastName":"Wadforth","email":"swadforth2@businessweek.com","username":"swadforth2"},
     {"id":4,"firstName":"Joseph","lastName":"Dunbavin","email":"jdunbavin3@nyu.edu","username":"jdunbavin3"},
     {"id":5,"firstName":"Adrien","lastName":"Mickan","email":"amickan4@unesco.org","username":"amickan4"},

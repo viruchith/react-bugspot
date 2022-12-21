@@ -48,7 +48,7 @@ function UserAccountPage() {
         console.log(username);
         if(username!==undefined && username.length>=5){
             const t =  usersMockArray.find(u=>u.username===username);
-            if(t){
+            if(t && t.id!=userData.id){
                 setUsernameAvail({visible:true,message:"username not available !",valid:false});
             }else{
                 setUsernameAvail({visible:true,message:"username available !",valid:true});

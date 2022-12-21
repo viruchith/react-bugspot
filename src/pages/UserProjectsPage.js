@@ -23,7 +23,7 @@ function UserProjectsPage() {
              <div>
              <span><strong>{"ID : #"+project.id+""}</strong></span>
               <span><h5>{project.name}</h5></span>
-              <span><span className={"badge "+((project.owner.id===loggedinUserMockObject.id)?"bg-warning text-dark":"bg-secondary")} >Owner : <strong>{"@"+project.owner.username}</strong></span></span>
+              <span><Link to={"/u/"+project.owner.username} className={"badge "+((project.owner.id===loggedinUserMockObject.id)?"bg-warning text-dark":"bg-secondary")} >Owner : <strong>{"@"+project.owner.username}</strong></Link></span>
              </div>
              </Link>
             </div>;

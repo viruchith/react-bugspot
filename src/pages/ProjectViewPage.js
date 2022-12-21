@@ -16,7 +16,7 @@ function ProjectViewPage() {
             <span className='h3'><strong>{project.name}</strong> <Link to={"/projects/"+projectId+"/edit"} className="btn btn-primary"><i className="fa-solid fa-pen-to-square"></i></Link>&nbsp;</span>
             <hr />
             <h5><strong>ID : </strong>#{project.id}</h5>
-            <h5><strong>Owner : </strong><Link className='badge bg-warning text-dark pill-rounded' >@{project.owner.username}&nbsp;<i className="fa-solid fa-crown"></i></Link></h5>
+            <h5><strong>Owner : </strong><Link to={"/u/"+project.owner.username} className='badge bg-warning text-dark pill-rounded' >@{project.owner.username}&nbsp;<i className="fa-solid fa-crown"></i></Link></h5>
             <div className="mb-3">
                 <h5><strong>Repository : </strong><a target="_blank" href={project.repoURL} rel="noreferrer" >{project.repoURL}</a></h5>
             </div>
