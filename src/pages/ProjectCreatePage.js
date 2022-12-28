@@ -26,7 +26,7 @@ function ProjectCreatePage() {
     
 
   return (
-    <ProjectCreateEditForm title={"Create New Project"} project={projectData} alertState={alertState} setAlertState={setAlertState} successfulSubmitHandler={ onSuccessfulSubmitHandler } />
+    <ProjectCreateEditForm isUpdate={false} title={"Create New Project"} project={projectData} alertState={alertState} setAlertState={setAlertState} successfulSubmitHandler={ onSuccessfulSubmitHandler } />
   )
 }
 

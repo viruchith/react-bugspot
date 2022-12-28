@@ -48,30 +48,51 @@ function LoginPage() {
   };
 
   return (
-   <FormContainerComponent>
-            <form action="" method="post" onSubmit={onSubmitHandler}  >
-          <div className="mb-3">
-            <h2>Login</h2>
-          </div>
-          {alertState.visible && <AlertBoxComponent type={alertState.type} message={alertState.message} />}
-          <div className="mb-3">
-            <label htmlFor="username" className="form-label">Username</label>
-            <input type="text"
-              className="form-control" name="username" id="username" aria-describedby="helpId" placeholder=""/>
-              <FieldErrorsComponent errors={fieldsErrors.username} />
-          </div>
-          <div className="mb-3">
-            <label htmlFor="password" className="form-label">Password</label>
-            <PasswordInputComponent name={"password"} id={"password"}/>
-              <FieldErrorsComponent errors={fieldsErrors.password} />
-          </div>
-          <button type="submit" className="btn btn-primary">Login</button>
-          <br />
-          <div className="p-3 mb-3">
-            <span>Don't have an account ? </span><span><Link to={"/signup"}>SignUp</Link></span>
-          </div>
-        </form>
-   </FormContainerComponent>);
+    <FormContainerComponent>
+      <form action="" method="post" onSubmit={onSubmitHandler}>
+        <div className="mb-3">
+          <h2>Login</h2>
+        </div>
+        {alertState.visible && (
+          <AlertBoxComponent
+            type={alertState.type}
+            message={alertState.message}
+          />
+        )}
+        <div className="mb-3">
+          <label htmlFor="username" className="form-label">
+            Username <span className="text-danger">*</span>
+          </label>
+          <input
+            type="text"
+            className="form-control"
+            name="username"
+            id="username"
+            aria-describedby="helpId"
+            placeholder=""
+          />
+          <FieldErrorsComponent errors={fieldsErrors.username} />
+        </div>
+        <div className="mb-3">
+          <label htmlFor="password" className="form-label">
+            Password <span className="text-danger">*</span>
+          </label>
+          <PasswordInputComponent name={"password"} id={"password"} />
+          <FieldErrorsComponent errors={fieldsErrors.password} />
+        </div>
+        <button type="submit" className="btn btn-primary">
+          Login
+        </button>
+        <br />
+        <div className="p-3 mb-3">
+          <span>Don't have an account ? </span>
+          <span>
+            <Link to={"/signup"}>SignUp</Link>
+          </span>
+        </div>
+      </form>
+    </FormContainerComponent>
+  );
 }
 
 export default LoginPage

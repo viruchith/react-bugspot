@@ -18,7 +18,7 @@ function UserProjectsPage() {
           <hr />
           <div className="mb-3 p-2">
           {userProjectsMockArray.map(project=>{
-            return <div key={project.id} className="card shadow p-3 mb-3 bg-body rounded">
+            return <div key={project.id} className="card project-card shadow p-3 mb-3 rounded">
           <Link style={{"textDecoration":"none"}} to={"/projects/"+project.id}>
              <div>
              <span><strong>{"ID : #"+project.id+""}</strong></span>

@@ -1,87 +1,102 @@
-import React, { useState } from 'react'
-import { CodeBlock } from 'react-code-blocks';
-import { validate } from 'validate.js';
-import FieldErrorsToStateMapper from '../helpers/FieldErrorsToStateMapper';
-import FieldErrorsComponent from '../components/FieldErrorsComponent';
-import AlertBoxComponent from '../components/AlertBoxComponent';
-import userProjectsMockArray from '../mock/userProjectsMock';
-import { useParams } from 'react-router-dom';
+import React, { useState } from "react";
+import { CodeBlock } from "react-code-blocks";
+import { validate } from "validate.js";
+import FieldErrorsToStateMapper from "../helpers/FieldErrorsToStateMapper";
+import FieldErrorsComponent from "../components/FieldErrorsComponent";
+import AlertBoxComponent from "../components/AlertBoxComponent";
+import userProjectsMockArray from "../mock/userProjectsMock";
+import { useParams } from "react-router-dom";
+import issuesMockArray from "../mock/issuesMock";
 
-function CreateIssuePage() {
+function EditIssuePage() {
+  const { projectId,issueId } = useParams();
 
-    const {projectId} = useParams();
+  const project = userProjectsMockArray.find((p) => p.id == projectId);
 
+  const issue = issuesMockArray.find((iss)=>iss.id==issueId);
 
-    const project = userProjectsMockArray.find(p=>p.id==projectId);
+  const [projectVersions, setprojectVersions] = useState(
+    project.projectVersions
+  );
 
+  const [sourceCode, setSourceCode] = useState("");
 
-    const [projectVersions, setprojectVersions] = useState(project.projectVersions);
+  const [fieldsErrors, setFieldsErrors] = useState({
+    category: [],
+    reproducibility: [],
+    severity: [],
+    priority: [],
+    productVersion: [],
+    summary: [],
+    description: [],
+  });
 
-    const [sourceCode, setSourceCode] = useState("");
+  const [alertState, setAlertState] = useState({
+    visible: false,
+    type: "danger",
+    message: "",
+  });
 
-    //TODO REMOVE THIS
-    const [out, setOut] = useState("");
+  const createIssueRules = {
+    category: {
+      presence: true,
+      inclusion: ["BUILD", "CORE", "INFRSTRUCTURE", "TESTS", "UI"],
+    },
+    reproducibility: {
+      presence: true,
+      inclusion: ["ALWAYS", "SOMETIMES", "RANDOM", "UTR", "NA"],
+    },
+    severity: {
+      presence: true,
+      inclusion: [
+        "FEATURE",
+        "TRIVIAL",
+        "TEXT",
+        "TWEAK",
+        "MINOR",
+        "MAJOR",
+        "BLOCK",
+      ],
+    },
+    priority: {
+      presence: true,
+      inclusion: ["LOW", "NORMAL", "HIGH", "URGENT", "IMMEDIATE"],
+    },
+    summary: {
+      presence: true,
+      length: {
+        maximum: 256,
+      },
+    },
+    description: {
+      presence: true,
+    },
+    productVersion: {
+      presence: true,
+    },
+  };
 
-
-    const [fieldsErrors, setFieldsErrors] = useState({category:[],reproducibility:[],severity:[],priority:[],productVersion:[],summary:[],description:[]});
-    
-    const [alertState,setAlertState] =  useState({visible:false,type:"danger",message:""});
-
-
-
-
-    const createIssueRules = {
-        category:{
-            presence:true,
-            inclusion:['BUILD','CORE','INFRSTRUCTURE','TESTS','UI']
-        },
-        reproducibility:{
-            presence:true,
-            inclusion:['ALWAYS','SOMETIMES','RANDOM','UTR','NA']
-        },
-        severity:{
-            presence:true,
-            inclusion:['FEATURE','TRIVIAL','TEXT','TWEAK','MINOR','MAJOR','BLOCK']
-        },
-        priority:{
-            presence:true,
-            inclusion:['LOW','NORMAL','HIGH','URGENT','IMMEDIATE']
-        },
-        summary:{
-            presence:true,
-            length:{
-                maximum:256
-            }
-        },
-        description:{
-            presence:true
-        },
-        productVersion:{
-            presence:true
-        }
-    };
-
-
-    const onSubmitHandler = (e)=>{
-        e.preventDefault();
-        setAlertState({visible:false,type:"success",message:""});
-        const formValues = validate.collectFormValues(e.target);
-        const errors = validate(formValues,createIssueRules);
-        FieldErrorsToStateMapper(errors,fieldsErrors,setFieldsErrors);
-        if(errors===undefined){
-          setAlertState({visible:true,type:"success",message:"Issue created Successfully !"});
-          console.log(formValues);
-          setOut(JSON.stringify(formValues));
-        }
-      };
-
-
+  const onSubmitHandler = (e) => {
+    e.preventDefault();
+    setAlertState({ visible: false, type: "success", message: "" });
+    const formValues = validate.collectFormValues(e.target);
+    const errors = validate(formValues, createIssueRules);
+    FieldErrorsToStateMapper(errors, fieldsErrors, setFieldsErrors);
+    if (errors === undefined) {
+      setAlertState({
+        visible: true,
+        type: "success",
+        message: "Issue updated Successfully !",
+      });
+      console.log(formValues);
+    }
+  };
 
   return (
     <div className="mt-5 mb-5 d-flex justify-content-center">
       <div className="card p-3 col-sm-8 col-md-6 col-lg-6">
         <div className="mb-3">
-          <h3>Create New Issue : </h3>
+          <h3>Edit Issue : </h3>
         </div>
         <hr />
         <form action="" method="post" onSubmit={onSubmitHandler}>
@@ -93,6 +108,21 @@ function CreateIssuePage() {
             />
           )}
           <div className="mb-3">
+            <label htmlFor="status">Status</label>
+            <select
+              className="form-select form-select-lg"
+              name="status"
+              id="status"
+              defaultValue={issue.status}
+            >
+              <option value="NEW">New</option>
+              <option value="ACKNOWLEDGED">Acknowledged</option>
+              <option value="CONFIRMED">Confirmed</option>
+              <option value="RESOLVED">Resolved</option>
+            </select>
+            <FieldErrorsComponent errors={fieldsErrors.category} />
+          </div>
+          <div className="mb-3">
             <label htmlFor="category" className="form-label">
               Category <span className="text-danger">*</span>
             </label>
@@ -100,6 +130,7 @@ function CreateIssuePage() {
               className="form-select form-select-lg"
               name="category"
               id="category"
+              defaultValue={issue.category}
             >
               <option value="BUILD">Build</option>
               <option value="CORE">Core</option>
@@ -117,6 +148,7 @@ function CreateIssuePage() {
               className="form-select form-select-lg"
               name="reproducibility"
               id="reproducibility"
+              defaultValue={issue.reproducibility}
             >
               <option value="ALWAYS">Always</option>
               <option value="SOMETIMES">Sometimes</option>
@@ -134,6 +166,7 @@ function CreateIssuePage() {
               className="form-select form-select-lg"
               name="severity"
               id="severity"
+              defaultValue={issue.severity}
             >
               <option value="FEATURE">Feature</option>
               <option value="TRIVIAL">Trivial</option>
@@ -154,6 +187,7 @@ function CreateIssuePage() {
               className="form-select form-select-lg"
               name="priority"
               id="priority"
+              defaultValue={issue.priority}
             >
               <option value="LOW">Low</option>
               <option value="NORMAL">Normal</option>
@@ -171,6 +205,7 @@ function CreateIssuePage() {
               className="form-select form-select-lg"
               name="productVersion"
               id="projductVersion"
+              defaultValue={issue.productVersion}
             >
               <option value="NA">NA</option>
               {projectVersions.map((version) => (
@@ -190,6 +225,7 @@ function CreateIssuePage() {
               className="form-control"
               name="summary"
               id="summary"
+              defaultValue={issue.summary}
             />
             <FieldErrorsComponent errors={fieldsErrors.summary} />
           </div>
@@ -203,6 +239,7 @@ function CreateIssuePage() {
               id="description"
               cols="30"
               rows="10"
+              defaultValue={issue.description}
             ></textarea>
             <FieldErrorsComponent errors={fieldsErrors.description} />
           </div>
@@ -216,6 +253,7 @@ function CreateIssuePage() {
               id="stepsToReproduce"
               cols="30"
               rows="10"
+              defaultValue={issue.stepsToReproduce}
             ></textarea>
           </div>
           <div className="mb-3">
@@ -228,6 +266,7 @@ function CreateIssuePage() {
               id="additionalInformation"
               cols="30"
               rows="10"
+              defaultValue={issue.additionalInformation}
             ></textarea>
           </div>
           <div className="mb-3">
@@ -250,6 +289,7 @@ function CreateIssuePage() {
               }}
               cols="30"
               rows="10"
+              defaultValue={issue.sourceCode}
             ></textarea>
           </div>
           <div className="mb-3">
@@ -262,16 +302,13 @@ function CreateIssuePage() {
             )}
           </div>
           <div className="mb-3">
-            <button className="btn btn-primary">Create</button>
+            <button className="btn btn-primary">Update</button>
           </div>
         </form>
         <br />
-        <div className="mb-3">
-          <CodeBlock text={out} language={"text"} wrapLines />
-        </div>
       </div>
     </div>
   );
 }
 
-export default CreateIssuePage
+export default EditIssuePage;

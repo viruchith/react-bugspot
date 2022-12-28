@@ -72,49 +72,107 @@ function UserAccountPage() {
 
   return (
     <>
-    <FormContainerComponent>
+      <FormContainerComponent>
         <div className="mb-3">
-        <form action="" method="post" onSubmit={onSubmitHandler}  >
-        <div className="mb-3">
-            <h3>Edit Account Details</h3>
-        </div>
-          {alertState.visible && <AlertBoxComponent type={alertState.type} message={alertState.message} />}
-          <div className="mb-3">
-            <label htmlFor="username" className="form-label">Username</label>
-            <input type="text"
-              className="form-control" name="username" id="username" defaultValue={userData.username} onKeyUp={(e)=>{usernameAvailabilityCheck(e.target.value)}} aria-describedby="helpId" placeholder=""/>
-              {usernameAvail.visible&& <div className={(usernameAvail.valid)?'text-success':'text-danger'} >{usernameAvail.message}</div>}
+          <form action="" method="post" onSubmit={onSubmitHandler}>
+            <div className="mb-3">
+              <h3>Edit Account Details</h3>
+            </div>
+            {alertState.visible && (
+              <AlertBoxComponent
+                type={alertState.type}
+                message={alertState.message}
+              />
+            )}
+            <div className="mb-3">
+              <label htmlFor="username" className="form-label">
+                Username <span className="text-danger">*</span>
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                name="username"
+                id="username"
+                defaultValue={userData.username}
+                onKeyUp={(e) => {
+                  usernameAvailabilityCheck(e.target.value);
+                }}
+                aria-describedby="helpId"
+                placeholder=""
+              />
+              {usernameAvail.visible && (
+                <div
+                  className={
+                    usernameAvail.valid ? "text-success" : "text-danger"
+                  }
+                >
+                  {usernameAvail.message}
+                </div>
+              )}
               <FieldErrorsComponent errors={fieldsErrors.username} />
-          </div>
-          <div className="mb-3">
-            <label htmlFor="email" className="form-label">Email</label>
-            <input type="text"
-              className="form-control" name="email" id="email" defaultValue={userData.email} aria-describedby="helpId" placeholder=""/>
+            </div>
+            <div className="mb-3">
+              <label htmlFor="email" className="form-label">
+                Email <span className="text-danger">*</span>
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                name="email"
+                id="email"
+                defaultValue={userData.email}
+                aria-describedby="helpId"
+                placeholder=""
+              />
               <FieldErrorsComponent errors={fieldsErrors.email} />
-          </div>
+            </div>
 
-          <div className="mb-3">
-            <label htmlFor="firstName" className="form-label">First Name</label>
-            <input type="text"
-              className="form-control" name="firstName" id="firstName" defaultValue={userData.firstName} aria-describedby="helpId" placeholder=""/>
+            <div className="mb-3">
+              <label htmlFor="firstName" className="form-label">
+                First Name <span className="text-danger">*</span>
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                name="firstName"
+                id="firstName"
+                defaultValue={userData.firstName}
+                aria-describedby="helpId"
+                placeholder=""
+              />
               <FieldErrorsComponent errors={fieldsErrors.firstName} />
-          </div>
+            </div>
 
-          <div className="mb-3">
-            <label htmlFor="lastName" className="form-label">Last Name</label>
-            <input type="text"
-              className="form-control" name="lastName" id="lastName" defaultValue={userData.lastName} aria-describedby="helpId" placeholder=""/>
+            <div className="mb-3">
+              <label htmlFor="lastName" className="form-label">
+                Last Name <span className="text-danger">*</span>
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                name="lastName"
+                id="lastName"
+                defaultValue={userData.lastName}
+                aria-describedby="helpId"
+                placeholder=""
+              />
               <FieldErrorsComponent errors={fieldsErrors.lastName} />
-          </div>
-          <button type="submit" className="btn btn-primary" disabled={!usernameAvail.valid} >Update</button>
-          <br />
-        </form>
+            </div>
+            <button
+              type="submit"
+              className="btn btn-primary"
+              disabled={!usernameAvail.valid}
+            >
+              Update
+            </button>
+            <br />
+          </form>
         </div>
-    </FormContainerComponent>
-    <br />
-    <ChangePasswordComponent/>
+      </FormContainerComponent>
+      <br />
+      <ChangePasswordComponent />
     </>
-  )
+  );
 }
 
 export default UserAccountPage

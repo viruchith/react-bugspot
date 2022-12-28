@@ -27,7 +27,7 @@ function ProjectDetailsEditPage(){
     
 
   return (
-    <ProjectCreateEditForm title={"Edit Project Details"} project={projectData} alertState={alertState} setAlertState={setAlertState} successfulSubmitHandler={ onSuccessfulSubmitHandler } />
+    <ProjectCreateEditForm isUpdate={true} title={"Edit Project Details"} project={projectData} alertState={alertState} setAlertState={setAlertState} successfulSubmitHandler={ onSuccessfulSubmitHandler } />
   )
 }
 

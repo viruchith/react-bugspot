@@ -41,26 +41,41 @@ function ChangePasswordComponent() {
   
   
     return (
-    <FormContainerComponent>
-          <form action="" method="post" onSubmit={onSubmitHandler}  >
-            <div className="mb-3">
-              <h2>Change Password</h2>
-            </div>
-            {alertState.visible && <AlertBoxComponent type={alertState.type} message={alertState.message} />}
-            <div className="mb-3">
-            <label htmlFor="password" className="form-label">Password</label>
-            <PasswordInputComponent name={"password"} id={"password"}/>
-              <FieldErrorsComponent errors={fieldsErrors.password} />
+      <FormContainerComponent>
+        <form action="" method="post" onSubmit={onSubmitHandler}>
+          <div className="mb-3">
+            <h2>Change Password</h2>
+          </div>
+          {alertState.visible && (
+            <AlertBoxComponent
+              type={alertState.type}
+              message={alertState.message}
+            />
+          )}
+          <div className="mb-3">
+            <label htmlFor="password" className="form-label">
+              Password <span className="text-danger">*</span>
+            </label>
+            <PasswordInputComponent name={"password"} id={"password"} />
+            <FieldErrorsComponent errors={fieldsErrors.password} />
           </div>
 
           <div className="mb-3">
-            <label htmlFor="confirmPassword" className="form-label">Confirm Password</label>
-            <PasswordInputComponent name={"confirmPassword"} id={"confirmPassword"}/>
-              <FieldErrorsComponent errors={fieldsErrors.confirmPassword} />
+            <label htmlFor="confirmPassword" className="form-label">
+              Confirm Password <span className="text-danger">*</span>
+            </label>
+            <PasswordInputComponent
+              name={"confirmPassword"}
+              id={"confirmPassword"}
+            />
+            <FieldErrorsComponent errors={fieldsErrors.confirmPassword} />
           </div>
-            <button type="submit" className="btn btn-primary">Change</button>
-          </form>
-    </FormContainerComponent>)
+          <button type="submit" className="btn btn-primary">
+            Change
+          </button>
+        </form>
+      </FormContainerComponent>
+    );
 }
 
 export default ChangePasswordComponent
